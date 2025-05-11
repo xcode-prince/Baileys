@@ -242,19 +242,19 @@ export namespace Cert {
                 constructor(properties?: Cert.CertChain.NoiseCertificate.IDetails);
 
                 /** Details serial. */
-                public serial: number;
+                public serial?: (number|null);
 
                 /** Details issuerSerial. */
-                public issuerSerial: number;
+                public issuerSerial?: (number|null);
 
                 /** Details key. */
-                public key: Uint8Array;
+                public key?: (Uint8Array|null);
 
                 /** Details notBefore. */
-                public notBefore: (number|Long);
+                public notBefore?: (number|Long|null);
 
                 /** Details notAfter. */
-                public notAfter: (number|Long);
+                public notAfter?: (number|Long|null);
 
                 /**
                  * Creates a new Details instance using the specified properties.
@@ -356,10 +356,10 @@ export namespace Cert {
         constructor(properties?: Cert.INoiseCertificate);
 
         /** NoiseCertificate details. */
-        public details: Uint8Array;
+        public details?: (Uint8Array|null);
 
         /** NoiseCertificate signature. */
-        public signature: Uint8Array;
+        public signature?: (Uint8Array|null);
 
         /**
          * Creates a new NoiseCertificate instance using the specified properties.
@@ -470,19 +470,19 @@ export namespace Cert {
             constructor(properties?: Cert.NoiseCertificate.IDetails);
 
             /** Details serial. */
-            public serial: number;
+            public serial?: (number|null);
 
             /** Details issuer. */
-            public issuer: string;
+            public issuer?: (string|null);
 
             /** Details expires. */
-            public expires: (number|Long);
+            public expires?: (number|Long|null);
 
             /** Details subject. */
-            public subject: string;
+            public subject?: (string|null);
 
             /** Details key. */
-            public key: Uint8Array;
+            public key?: (Uint8Array|null);
 
             /**
              * Creates a new Details instance using the specified properties.
