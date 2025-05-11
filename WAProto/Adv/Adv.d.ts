@@ -26,13 +26,13 @@ export namespace Adv {
         constructor(properties?: Adv.IADVSignedDeviceIdentityHMAC);
 
         /** ADVSignedDeviceIdentityHMAC details. */
-        public details: Uint8Array;
+        public details?: (Uint8Array|null);
 
         /** ADVSignedDeviceIdentityHMAC hmac. */
-        public hmac: Uint8Array;
+        public hmac?: (Uint8Array|null);
 
         /** ADVSignedDeviceIdentityHMAC accountType. */
-        public accountType: Adv.ADVEncryptionType;
+        public accountType?: (Adv.ADVEncryptionType|null);
 
         /**
          * Creates a new ADVSignedDeviceIdentityHMAC instance using the specified properties.
@@ -138,16 +138,16 @@ export namespace Adv {
         constructor(properties?: Adv.IADVSignedDeviceIdentity);
 
         /** ADVSignedDeviceIdentity details. */
-        public details: Uint8Array;
+        public details?: (Uint8Array|null);
 
         /** ADVSignedDeviceIdentity accountSignatureKey. */
-        public accountSignatureKey: Uint8Array;
+        public accountSignatureKey?: (Uint8Array|null);
 
         /** ADVSignedDeviceIdentity accountSignature. */
-        public accountSignature: Uint8Array;
+        public accountSignature?: (Uint8Array|null);
 
         /** ADVSignedDeviceIdentity deviceSignature. */
-        public deviceSignature: Uint8Array;
+        public deviceSignature?: (Uint8Array|null);
 
         /**
          * Creates a new ADVSignedDeviceIdentity instance using the specified properties.
@@ -256,19 +256,19 @@ export namespace Adv {
         constructor(properties?: Adv.IADVDeviceIdentity);
 
         /** ADVDeviceIdentity rawId. */
-        public rawId: number;
+        public rawId?: (number|null);
 
         /** ADVDeviceIdentity timestamp. */
-        public timestamp: (number|Long);
+        public timestamp?: (number|Long|null);
 
         /** ADVDeviceIdentity keyIndex. */
-        public keyIndex: number;
+        public keyIndex?: (number|null);
 
         /** ADVDeviceIdentity accountType. */
-        public accountType: Adv.ADVEncryptionType;
+        public accountType?: (Adv.ADVEncryptionType|null);
 
         /** ADVDeviceIdentity deviceType. */
-        public deviceType: Adv.ADVEncryptionType;
+        public deviceType?: (Adv.ADVEncryptionType|null);
 
         /**
          * Creates a new ADVDeviceIdentity instance using the specified properties.
@@ -371,13 +371,13 @@ export namespace Adv {
         constructor(properties?: Adv.IADVSignedKeyIndexList);
 
         /** ADVSignedKeyIndexList details. */
-        public details: Uint8Array;
+        public details?: (Uint8Array|null);
 
         /** ADVSignedKeyIndexList accountSignature. */
-        public accountSignature: Uint8Array;
+        public accountSignature?: (Uint8Array|null);
 
         /** ADVSignedKeyIndexList accountSignatureKey. */
-        public accountSignatureKey: Uint8Array;
+        public accountSignatureKey?: (Uint8Array|null);
 
         /**
          * Creates a new ADVSignedKeyIndexList instance using the specified properties.
@@ -486,19 +486,19 @@ export namespace Adv {
         constructor(properties?: Adv.IADVKeyIndexList);
 
         /** ADVKeyIndexList rawId. */
-        public rawId: number;
+        public rawId?: (number|null);
 
         /** ADVKeyIndexList timestamp. */
-        public timestamp: (number|Long);
+        public timestamp?: (number|Long|null);
 
         /** ADVKeyIndexList currentIndex. */
-        public currentIndex: number;
+        public currentIndex?: (number|null);
 
         /** ADVKeyIndexList validIndexes. */
         public validIndexes: number[];
 
         /** ADVKeyIndexList accountType. */
-        public accountType: Adv.ADVEncryptionType;
+        public accountType?: (Adv.ADVEncryptionType|null);
 
         /**
          * Creates a new ADVKeyIndexList instance using the specified properties.
