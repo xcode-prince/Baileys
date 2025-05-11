@@ -45,11 +45,11 @@ $root.DeviceCapabilities = (function() {
 
         /**
          * DeviceCapabilities chatLockSupportLevel.
-         * @member {DeviceCapabilities.DeviceCapabilities.ChatLockSupportLevel} chatLockSupportLevel
+         * @member {DeviceCapabilities.DeviceCapabilities.ChatLockSupportLevel|null|undefined} chatLockSupportLevel
          * @memberof DeviceCapabilities.DeviceCapabilities
          * @instance
          */
-        DeviceCapabilities.prototype.chatLockSupportLevel = 0;
+        DeviceCapabilities.prototype.chatLockSupportLevel = null;
 
         /**
          * DeviceCapabilities lidMigration.
@@ -58,6 +58,21 @@ $root.DeviceCapabilities = (function() {
          * @instance
          */
         DeviceCapabilities.prototype.lidMigration = null;
+        
+        // OneOf field names bound to virtual getters and setters
+        var $oneOfFields;
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(DeviceCapabilities.prototype, "_chatLockSupportLevel", {
+            get: $util.oneOfGetter($oneOfFields = ["chatLockSupportLevel"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(DeviceCapabilities.prototype, "_lidMigration", {
+            get: $util.oneOfGetter($oneOfFields = ["lidMigration"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
 
         /**
          * Creates a new DeviceCapabilities instance using the specified properties.
@@ -114,14 +129,12 @@ $root.DeviceCapabilities = (function() {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        DeviceCapabilities.decode = function decode(reader, length, error) {
+        DeviceCapabilities.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.DeviceCapabilities.DeviceCapabilities();
             while (reader.pos < end) {
                 var tag = reader.uint32();
-                if (tag === error)
-                    break;
                 switch (tag >>> 3) {
                 case 1: {
                         message.chatLockSupportLevel = reader.int32();
@@ -166,7 +179,9 @@ $root.DeviceCapabilities = (function() {
         DeviceCapabilities.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.chatLockSupportLevel != null && message.hasOwnProperty("chatLockSupportLevel"))
+            var properties = {};
+            if (message.chatLockSupportLevel != null && message.hasOwnProperty("chatLockSupportLevel")) {
+                properties._chatLockSupportLevel = 1;
                 switch (message.chatLockSupportLevel) {
                 default:
                     return "chatLockSupportLevel: enum value expected";
@@ -175,10 +190,14 @@ $root.DeviceCapabilities = (function() {
                 case 2:
                     break;
                 }
+            }
             if (message.lidMigration != null && message.hasOwnProperty("lidMigration")) {
-                var error = $root.DeviceCapabilities.DeviceCapabilities.LIDMigration.verify(message.lidMigration);
-                if (error)
-                    return "lidMigration." + error;
+                properties._lidMigration = 1;
+                {
+                    var error = $root.DeviceCapabilities.DeviceCapabilities.LIDMigration.verify(message.lidMigration);
+                    if (error)
+                        return "lidMigration." + error;
+                }
             }
             return null;
         };
@@ -217,7 +236,7 @@ $root.DeviceCapabilities = (function() {
             }
             if (object.lidMigration != null) {
                 if (typeof object.lidMigration !== "object")
-                    throw TypeError(".DeviceCapabilities.DeviceCapabilities.lidMigration: object expected");
+                    throw TypeError(".proto.DeviceCapabilities.lidMigration: object expected");
                 message.lidMigration = $root.DeviceCapabilities.DeviceCapabilities.LIDMigration.fromObject(object.lidMigration);
             }
             return message;
@@ -236,14 +255,16 @@ $root.DeviceCapabilities = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                object.chatLockSupportLevel = options.enums === String ? "NONE" : 0;
-                object.lidMigration = null;
-            }
-            if (message.chatLockSupportLevel != null && message.hasOwnProperty("chatLockSupportLevel"))
+            if (message.chatLockSupportLevel != null && message.hasOwnProperty("chatLockSupportLevel")) {
                 object.chatLockSupportLevel = options.enums === String ? $root.DeviceCapabilities.DeviceCapabilities.ChatLockSupportLevel[message.chatLockSupportLevel] === undefined ? message.chatLockSupportLevel : $root.DeviceCapabilities.DeviceCapabilities.ChatLockSupportLevel[message.chatLockSupportLevel] : message.chatLockSupportLevel;
-            if (message.lidMigration != null && message.hasOwnProperty("lidMigration"))
+                if (options.oneofs)
+                    object._chatLockSupportLevel = "chatLockSupportLevel";
+            }
+            if (message.lidMigration != null && message.hasOwnProperty("lidMigration")) {
                 object.lidMigration = $root.DeviceCapabilities.DeviceCapabilities.LIDMigration.toObject(message.lidMigration, options);
+                if (options.oneofs)
+                    object._lidMigration = "lidMigration";
+            }
             return object;
         };
 
@@ -315,11 +336,20 @@ $root.DeviceCapabilities = (function() {
 
             /**
              * LIDMigration chatDbMigrationTimestamp.
-             * @member {number|Long} chatDbMigrationTimestamp
+             * @member {number|Long|null|undefined} chatDbMigrationTimestamp
              * @memberof DeviceCapabilities.DeviceCapabilities.LIDMigration
              * @instance
              */
-            LIDMigration.prototype.chatDbMigrationTimestamp = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+            LIDMigration.prototype.chatDbMigrationTimestamp = null;
+            
+            // OneOf field names bound to virtual getters and setters
+            var $oneOfFields;
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(LIDMigration.prototype, "_chatDbMigrationTimestamp", {
+                get: $util.oneOfGetter($oneOfFields = ["chatDbMigrationTimestamp"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
 
             /**
              * Creates a new LIDMigration instance using the specified properties.
@@ -374,14 +404,12 @@ $root.DeviceCapabilities = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            LIDMigration.decode = function decode(reader, length, error) {
+            LIDMigration.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.DeviceCapabilities.DeviceCapabilities.LIDMigration();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.chatDbMigrationTimestamp = reader.uint64();
@@ -422,9 +450,12 @@ $root.DeviceCapabilities = (function() {
             LIDMigration.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
-                if (message.chatDbMigrationTimestamp != null && message.hasOwnProperty("chatDbMigrationTimestamp"))
+                var properties = {};
+                if (message.chatDbMigrationTimestamp != null && message.hasOwnProperty("chatDbMigrationTimestamp")) {
+                    properties._chatDbMigrationTimestamp = 1;
                     if (!$util.isInteger(message.chatDbMigrationTimestamp) && !(message.chatDbMigrationTimestamp && $util.isInteger(message.chatDbMigrationTimestamp.low) && $util.isInteger(message.chatDbMigrationTimestamp.high)))
                         return "chatDbMigrationTimestamp: integer|Long expected";
+                }
                 return null;
             };
 
@@ -465,17 +496,14 @@ $root.DeviceCapabilities = (function() {
                 if (!options)
                     options = {};
                 var object = {};
-                if (options.defaults)
-                    if ($util.Long) {
-                        var long = new $util.Long(0, 0, true);
-                        object.chatDbMigrationTimestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                    } else
-                        object.chatDbMigrationTimestamp = options.longs === String ? "0" : 0;
-                if (message.chatDbMigrationTimestamp != null && message.hasOwnProperty("chatDbMigrationTimestamp"))
+                if (message.chatDbMigrationTimestamp != null && message.hasOwnProperty("chatDbMigrationTimestamp")) {
                     if (typeof message.chatDbMigrationTimestamp === "number")
                         object.chatDbMigrationTimestamp = options.longs === String ? String(message.chatDbMigrationTimestamp) : message.chatDbMigrationTimestamp;
                     else
                         object.chatDbMigrationTimestamp = options.longs === String ? $util.Long.prototype.toString.call(message.chatDbMigrationTimestamp) : options.longs === Number ? new $util.LongBits(message.chatDbMigrationTimestamp.low >>> 0, message.chatDbMigrationTimestamp.high >>> 0).toNumber(true) : message.chatDbMigrationTimestamp;
+                    if (options.oneofs)
+                        object._chatDbMigrationTimestamp = "chatDbMigrationTimestamp";
+                }
                 return object;
             };
 

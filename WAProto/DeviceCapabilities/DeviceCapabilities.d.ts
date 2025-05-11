@@ -23,7 +23,7 @@ export namespace DeviceCapabilities {
         constructor(properties?: DeviceCapabilities.IDeviceCapabilities);
 
         /** DeviceCapabilities chatLockSupportLevel. */
-        public chatLockSupportLevel: DeviceCapabilities.DeviceCapabilities.ChatLockSupportLevel;
+        public chatLockSupportLevel?: (DeviceCapabilities.DeviceCapabilities.ChatLockSupportLevel|null);
 
         /** DeviceCapabilities lidMigration. */
         public lidMigration?: (DeviceCapabilities.DeviceCapabilities.ILIDMigration|null);
@@ -132,7 +132,7 @@ export namespace DeviceCapabilities {
             constructor(properties?: DeviceCapabilities.DeviceCapabilities.ILIDMigration);
 
             /** LIDMigration chatDbMigrationTimestamp. */
-            public chatDbMigrationTimestamp: (number|Long);
+            public chatDbMigrationTimestamp?: (number|Long|null);
 
             /**
              * Creates a new LIDMigration instance using the specified properties.
