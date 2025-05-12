@@ -212,7 +212,7 @@ $root.ChatLockSettings = (function() {
                 message.hideLockedChats = Boolean(object.hideLockedChats);
             if (object.secretCode != null) {
                 if (typeof object.secretCode !== "object")
-                    throw TypeError(".proto.ChatLockSettings.secretCode: object expected");
+                    throw TypeError(".ChatLockSettings.ChatLockSettings.secretCode: object expected");
                 message.secretCode = $root.UserPassword.UserPassword.fromObject(object.secretCode);
             }
             return message;
@@ -575,11 +575,11 @@ $root.UserPassword = (function() {
             }
             if (object.transformerArg) {
                 if (!Array.isArray(object.transformerArg))
-                    throw TypeError(".proto.UserPassword.transformerArg: array expected");
+                    throw TypeError(".UserPassword.UserPassword.transformerArg: array expected");
                 message.transformerArg = [];
                 for (var i = 0; i < object.transformerArg.length; ++i) {
                     if (typeof object.transformerArg[i] !== "object")
-                        throw TypeError(".proto.UserPassword.transformerArg: object expected");
+                        throw TypeError(".UserPassword.UserPassword.transformerArg: object expected");
                     message.transformerArg[i] = $root.UserPassword.UserPassword.TransformerArg.fromObject(object.transformerArg[i]);
                 }
             }
@@ -879,7 +879,7 @@ $root.UserPassword = (function() {
                     message.key = String(object.key);
                 if (object.value != null) {
                     if (typeof object.value !== "object")
-                        throw TypeError(".proto.UserPassword.TransformerArg.value: object expected");
+                        throw TypeError(".UserPassword.UserPassword.TransformerArg.value: object expected");
                     message.value = $root.UserPassword.UserPassword.TransformerArg.Value.fromObject(object.value);
                 }
                 return message;
