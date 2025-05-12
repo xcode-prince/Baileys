@@ -1250,7 +1250,7 @@ $root.CompanionReg = (function() {
                     message.companionEphemeralIdentity = object.companionEphemeralIdentity;
             if (object.commitment != null) {
                 if (typeof object.commitment !== "object")
-                    throw TypeError(".proto.ProloguePayload.commitment: object expected");
+                    throw TypeError(".CompanionReg.ProloguePayload.commitment: object expected");
                 message.commitment = $root.CompanionReg.CompanionCommitment.fromObject(object.commitment);
             }
             return message;
@@ -2252,7 +2252,7 @@ $root.CompanionReg = (function() {
                 message.os = String(object.os);
             if (object.version != null) {
                 if (typeof object.version !== "object")
-                    throw TypeError(".proto.DeviceProps.version: object expected");
+                    throw TypeError(".CompanionReg.DeviceProps.version: object expected");
                 message.version = $root.CompanionReg.DeviceProps.AppVersion.fromObject(object.version);
             }
             switch (object.platformType) {
@@ -2367,7 +2367,7 @@ $root.CompanionReg = (function() {
                 message.requireFullSync = Boolean(object.requireFullSync);
             if (object.historySyncConfig != null) {
                 if (typeof object.historySyncConfig !== "object")
-                    throw TypeError(".proto.DeviceProps.historySyncConfig: object expected");
+                    throw TypeError(".CompanionReg.DeviceProps.historySyncConfig: object expected");
                 message.historySyncConfig = $root.CompanionReg.DeviceProps.HistorySyncConfig.fromObject(object.historySyncConfig);
             }
             return message;
