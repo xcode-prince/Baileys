@@ -213,12 +213,12 @@ $root.Cert = (function() {
             var message = new $root.Cert.CertChain();
             if (object.leaf != null) {
                 if (typeof object.leaf !== "object")
-                    throw TypeError(".proto.CertChain.leaf: object expected");
+                    throw TypeError(".Cert.CertChain.leaf: object expected");
                 message.leaf = $root.Cert.CertChain.NoiseCertificate.fromObject(object.leaf);
             }
             if (object.intermediate != null) {
                 if (typeof object.intermediate !== "object")
-                    throw TypeError(".proto.CertChain.intermediate: object expected");
+                    throw TypeError(".Cert.CertChain.intermediate: object expected");
                 message.intermediate = $root.Cert.CertChain.NoiseCertificate.fromObject(object.intermediate);
             }
             return message;
