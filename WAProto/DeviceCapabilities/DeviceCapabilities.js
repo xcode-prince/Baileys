@@ -236,7 +236,7 @@ $root.DeviceCapabilities = (function() {
             }
             if (object.lidMigration != null) {
                 if (typeof object.lidMigration !== "object")
-                    throw TypeError(".proto.DeviceCapabilities.lidMigration: object expected");
+                    throw TypeError(".DeviceCapabilities.DeviceCapabilities.lidMigration: object expected");
                 message.lidMigration = $root.DeviceCapabilities.DeviceCapabilities.LIDMigration.fromObject(object.lidMigration);
             }
             return message;
