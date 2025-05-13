@@ -44,11 +44,20 @@ $root.MmsRetry = (function() {
 
         /**
          * ServerErrorReceipt stanzaId.
-         * @member {string} stanzaId
+         * @member {string|null|undefined} stanzaId
          * @memberof MmsRetry.ServerErrorReceipt
          * @instance
          */
-        ServerErrorReceipt.prototype.stanzaId = "";
+        ServerErrorReceipt.prototype.stanzaId = null;
+        
+        // OneOf field names bound to virtual getters and setters
+        var $oneOfFields;
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(ServerErrorReceipt.prototype, "_stanzaId", {
+            get: $util.oneOfGetter($oneOfFields = ["stanzaId"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
 
         /**
          * Creates a new ServerErrorReceipt instance using the specified properties.
@@ -103,14 +112,12 @@ $root.MmsRetry = (function() {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ServerErrorReceipt.decode = function decode(reader, length, error) {
+        ServerErrorReceipt.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.MmsRetry.ServerErrorReceipt();
             while (reader.pos < end) {
                 var tag = reader.uint32();
-                if (tag === error)
-                    break;
                 switch (tag >>> 3) {
                 case 1: {
                         message.stanzaId = reader.string();
@@ -151,9 +158,12 @@ $root.MmsRetry = (function() {
         ServerErrorReceipt.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.stanzaId != null && message.hasOwnProperty("stanzaId"))
+            var properties = {};
+            if (message.stanzaId != null && message.hasOwnProperty("stanzaId")) {
+                properties._stanzaId = 1;
                 if (!$util.isString(message.stanzaId))
                     return "stanzaId: string expected";
+            }
             return null;
         };
 
@@ -187,10 +197,11 @@ $root.MmsRetry = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
-                object.stanzaId = "";
-            if (message.stanzaId != null && message.hasOwnProperty("stanzaId"))
+            if (message.stanzaId != null && message.hasOwnProperty("stanzaId")) {
                 object.stanzaId = message.stanzaId;
+                if (options.oneofs)
+                    object._stanzaId = "stanzaId";
+            }
             return object;
         };
 
@@ -252,35 +263,62 @@ $root.MmsRetry = (function() {
 
         /**
          * MediaRetryNotification stanzaId.
-         * @member {string} stanzaId
+         * @member {string|null|undefined} stanzaId
          * @memberof MmsRetry.MediaRetryNotification
          * @instance
          */
-        MediaRetryNotification.prototype.stanzaId = "";
+        MediaRetryNotification.prototype.stanzaId = null;
 
         /**
          * MediaRetryNotification directPath.
-         * @member {string} directPath
+         * @member {string|null|undefined} directPath
          * @memberof MmsRetry.MediaRetryNotification
          * @instance
          */
-        MediaRetryNotification.prototype.directPath = "";
+        MediaRetryNotification.prototype.directPath = null;
 
         /**
          * MediaRetryNotification result.
-         * @member {MmsRetry.MediaRetryNotification.ResultType} result
+         * @member {MmsRetry.MediaRetryNotification.ResultType|null|undefined} result
          * @memberof MmsRetry.MediaRetryNotification
          * @instance
          */
-        MediaRetryNotification.prototype.result = 0;
+        MediaRetryNotification.prototype.result = null;
 
         /**
          * MediaRetryNotification messageSecret.
-         * @member {Uint8Array} messageSecret
+         * @member {Uint8Array|null|undefined} messageSecret
          * @memberof MmsRetry.MediaRetryNotification
          * @instance
          */
-        MediaRetryNotification.prototype.messageSecret = $util.newBuffer([]);
+        MediaRetryNotification.prototype.messageSecret = null;
+        
+        // OneOf field names bound to virtual getters and setters
+        var $oneOfFields;
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(MediaRetryNotification.prototype, "_stanzaId", {
+            get: $util.oneOfGetter($oneOfFields = ["stanzaId"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(MediaRetryNotification.prototype, "_directPath", {
+            get: $util.oneOfGetter($oneOfFields = ["directPath"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(MediaRetryNotification.prototype, "_result", {
+            get: $util.oneOfGetter($oneOfFields = ["result"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(MediaRetryNotification.prototype, "_messageSecret", {
+            get: $util.oneOfGetter($oneOfFields = ["messageSecret"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
 
         /**
          * Creates a new MediaRetryNotification instance using the specified properties.
@@ -341,14 +379,12 @@ $root.MmsRetry = (function() {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        MediaRetryNotification.decode = function decode(reader, length, error) {
+        MediaRetryNotification.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.MmsRetry.MediaRetryNotification();
             while (reader.pos < end) {
                 var tag = reader.uint32();
-                if (tag === error)
-                    break;
                 switch (tag >>> 3) {
                 case 1: {
                         message.stanzaId = reader.string();
@@ -401,13 +437,19 @@ $root.MmsRetry = (function() {
         MediaRetryNotification.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.stanzaId != null && message.hasOwnProperty("stanzaId"))
+            var properties = {};
+            if (message.stanzaId != null && message.hasOwnProperty("stanzaId")) {
+                properties._stanzaId = 1;
                 if (!$util.isString(message.stanzaId))
                     return "stanzaId: string expected";
-            if (message.directPath != null && message.hasOwnProperty("directPath"))
+            }
+            if (message.directPath != null && message.hasOwnProperty("directPath")) {
+                properties._directPath = 1;
                 if (!$util.isString(message.directPath))
                     return "directPath: string expected";
-            if (message.result != null && message.hasOwnProperty("result"))
+            }
+            if (message.result != null && message.hasOwnProperty("result")) {
+                properties._result = 1;
                 switch (message.result) {
                 default:
                     return "result: enum value expected";
@@ -417,9 +459,12 @@ $root.MmsRetry = (function() {
                 case 3:
                     break;
                 }
-            if (message.messageSecret != null && message.hasOwnProperty("messageSecret"))
+            }
+            if (message.messageSecret != null && message.hasOwnProperty("messageSecret")) {
+                properties._messageSecret = 1;
                 if (!(message.messageSecret && typeof message.messageSecret.length === "number" || $util.isString(message.messageSecret)))
                     return "messageSecret: buffer expected";
+            }
             return null;
         };
 
@@ -484,26 +529,26 @@ $root.MmsRetry = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                object.stanzaId = "";
-                object.directPath = "";
-                object.result = options.enums === String ? "GENERAL_ERROR" : 0;
-                if (options.bytes === String)
-                    object.messageSecret = "";
-                else {
-                    object.messageSecret = [];
-                    if (options.bytes !== Array)
-                        object.messageSecret = $util.newBuffer(object.messageSecret);
-                }
-            }
-            if (message.stanzaId != null && message.hasOwnProperty("stanzaId"))
+            if (message.stanzaId != null && message.hasOwnProperty("stanzaId")) {
                 object.stanzaId = message.stanzaId;
-            if (message.directPath != null && message.hasOwnProperty("directPath"))
+                if (options.oneofs)
+                    object._stanzaId = "stanzaId";
+            }
+            if (message.directPath != null && message.hasOwnProperty("directPath")) {
                 object.directPath = message.directPath;
-            if (message.result != null && message.hasOwnProperty("result"))
+                if (options.oneofs)
+                    object._directPath = "directPath";
+            }
+            if (message.result != null && message.hasOwnProperty("result")) {
                 object.result = options.enums === String ? $root.MmsRetry.MediaRetryNotification.ResultType[message.result] === undefined ? message.result : $root.MmsRetry.MediaRetryNotification.ResultType[message.result] : message.result;
-            if (message.messageSecret != null && message.hasOwnProperty("messageSecret"))
+                if (options.oneofs)
+                    object._result = "result";
+            }
+            if (message.messageSecret != null && message.hasOwnProperty("messageSecret")) {
                 object.messageSecret = options.bytes === String ? $util.base64.encode(message.messageSecret, 0, message.messageSecret.length) : options.bytes === Array ? Array.prototype.slice.call(message.messageSecret) : message.messageSecret;
+                if (options.oneofs)
+                    object._messageSecret = "messageSecret";
+            }
             return object;
         };
 
