@@ -53,10 +53,10 @@ export namespace ServerSync {
         public externalMutations?: (ServerSync.IExternalBlobReference|null);
 
         /** SyncdPatch snapshotMac. */
-        public snapshotMac: Uint8Array;
+        public snapshotMac?: (Uint8Array|null);
 
         /** SyncdPatch patchMac. */
-        public patchMac: Uint8Array;
+        public patchMac?: (Uint8Array|null);
 
         /** SyncdPatch keyId. */
         public keyId?: (ServerSync.IKeyId|null);
@@ -65,10 +65,10 @@ export namespace ServerSync {
         public exitCode?: (ServerSync.IExitCode|null);
 
         /** SyncdPatch deviceIndex. */
-        public deviceIndex: number;
+        public deviceIndex?: (number|null);
 
         /** SyncdPatch clientDebugData. */
-        public clientDebugData: Uint8Array;
+        public clientDebugData?: (Uint8Array|null);
 
         /**
          * Creates a new SyncdPatch instance using the specified properties.
@@ -168,7 +168,7 @@ export namespace ServerSync {
         constructor(properties?: ServerSync.ISyncdMutation);
 
         /** SyncdMutation operation. */
-        public operation: ServerSync.SyncdMutation.SyncdOperation;
+        public operation?: (ServerSync.SyncdMutation.SyncdOperation|null);
 
         /** SyncdMutation record. */
         public record?: (ServerSync.ISyncdRecord|null);
@@ -389,7 +389,7 @@ export namespace ServerSync {
         public records: ServerSync.ISyncdRecord[];
 
         /** SyncdSnapshot mac. */
-        public mac: Uint8Array;
+        public mac?: (Uint8Array|null);
 
         /** SyncdSnapshot keyId. */
         public keyId?: (ServerSync.IKeyId|null);
@@ -725,7 +725,7 @@ export namespace ServerSync {
         constructor(properties?: ServerSync.IKeyId);
 
         /** KeyId id. */
-        public id: Uint8Array;
+        public id?: (Uint8Array|null);
 
         /**
          * Creates a new KeyId instance using the specified properties.
@@ -822,7 +822,7 @@ export namespace ServerSync {
         constructor(properties?: ServerSync.ISyncdValue);
 
         /** SyncdValue blob. */
-        public blob: Uint8Array;
+        public blob?: (Uint8Array|null);
 
         /**
          * Creates a new SyncdValue instance using the specified properties.
@@ -919,7 +919,7 @@ export namespace ServerSync {
         constructor(properties?: ServerSync.ISyncdIndex);
 
         /** SyncdIndex blob. */
-        public blob: Uint8Array;
+        public blob?: (Uint8Array|null);
 
         /**
          * Creates a new SyncdIndex instance using the specified properties.
@@ -1119,7 +1119,7 @@ export namespace ServerSync {
         constructor(properties?: ServerSync.ISyncdVersion);
 
         /** SyncdVersion version. */
-        public version: (number|Long);
+        public version?: (number|Long|null);
 
         /**
          * Creates a new SyncdVersion instance using the specified properties.
