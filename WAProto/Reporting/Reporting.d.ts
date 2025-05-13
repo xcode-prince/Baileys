@@ -32,16 +32,16 @@ export namespace Reporting {
         constructor(properties?: Reporting.IField);
 
         /** Field minVersion. */
-        public minVersion: number;
+        public minVersion?: (number|null);
 
         /** Field maxVersion. */
-        public maxVersion: number;
+        public maxVersion?: (number|null);
 
         /** Field notReportableMinVersion. */
-        public notReportableMinVersion: number;
+        public notReportableMinVersion?: (number|null);
 
         /** Field isMessage. */
-        public isMessage: boolean;
+        public isMessage?: (boolean|null);
 
         /** Field subfield. */
         public subfield: { [k: string]: Reporting.IField };
@@ -253,16 +253,16 @@ export namespace Reporting {
         constructor(properties?: Reporting.IReportable);
 
         /** Reportable minVersion. */
-        public minVersion: number;
+        public minVersion?: (number|null);
 
         /** Reportable maxVersion. */
-        public maxVersion: number;
+        public maxVersion?: (number|null);
 
         /** Reportable notReportableMinVersion. */
-        public notReportableMinVersion: number;
+        public notReportableMinVersion?: (number|null);
 
         /** Reportable never. */
-        public never: boolean;
+        public never?: (boolean|null);
 
         /**
          * Creates a new Reportable instance using the specified properties.
