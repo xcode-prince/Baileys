@@ -2066,7 +2066,7 @@ $root.ServerSync = (function() {
                     object._keyId = "keyId";
             }
             return object;
-        }; in
+        }; 
 
         /**
          * Converts this SyncdRecord to JSON.
