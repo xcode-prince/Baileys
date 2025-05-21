@@ -213,14 +213,12 @@ $root.SyncAction = (function() {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        PatchDebugData.decode = function decode(reader, length, error) {
+        PatchDebugData.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.PatchDebugData();
             while (reader.pos < end) {
                 var tag = reader.uint32();
-                if (tag === error)
-                    break;
                 switch (tag >>> 3) {
                 case 1: {
                         message.currentLthash = reader.bytes();
@@ -708,14 +706,12 @@ $root.SyncAction = (function() {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        SyncActionData.decode = function decode(reader, length, error) {
+        SyncActionData.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionData();
             while (reader.pos < end) {
                 var tag = reader.uint32();
-                if (tag === error)
-                    break;
                 switch (tag >>> 3) {
                 case 1: {
                         message.index = reader.bytes();
@@ -950,6 +946,7 @@ $root.SyncAction = (function() {
          * @property {SyncAction.SyncActionValue.INotificationActivitySettingAction|null} [notificationActivitySettingAction] SyncActionValue notificationActivitySettingAction
          * @property {SyncAction.SyncActionValue.ILidContactAction|null} [lidContactAction] SyncActionValue lidContactAction
          * @property {SyncAction.SyncActionValue.ICtwaPerCustomerDataSharingAction|null} [ctwaPerCustomerDataSharingAction] SyncActionValue ctwaPerCustomerDataSharingAction
+         * @property {SyncAction.SyncActionValue.IPaymentTosAction|null} [paymentTosAction] SyncActionValue paymentTosAction
          */
 
         /**
@@ -1416,6 +1413,14 @@ $root.SyncAction = (function() {
         SyncActionValue.prototype.ctwaPerCustomerDataSharingAction = null;
 
         /**
+         * SyncActionValue paymentTosAction.
+         * @member {SyncAction.SyncActionValue.IPaymentTosAction|null|undefined} paymentTosAction
+         * @memberof SyncAction.SyncActionValue
+         * @instance
+         */
+        SyncActionValue.prototype.paymentTosAction = null;
+
+        /**
          * Creates a new SyncActionValue instance using the specified properties.
          * @function create
          * @memberof SyncAction.SyncActionValue
@@ -1551,6 +1556,8 @@ $root.SyncAction = (function() {
                 $root.SyncAction.SyncActionValue.LidContactAction.encode(message.lidContactAction, writer.uint32(/* id 61, wireType 2 =*/490).fork()).ldelim();
             if (message.ctwaPerCustomerDataSharingAction != null && Object.hasOwnProperty.call(message, "ctwaPerCustomerDataSharingAction"))
                 $root.SyncAction.SyncActionValue.CtwaPerCustomerDataSharingAction.encode(message.ctwaPerCustomerDataSharingAction, writer.uint32(/* id 62, wireType 2 =*/498).fork()).ldelim();
+            if (message.paymentTosAction != null && Object.hasOwnProperty.call(message, "paymentTosAction"))
+                $root.SyncAction.SyncActionValue.PaymentTosAction.encode(message.paymentTosAction, writer.uint32(/* id 63, wireType 2 =*/506).fork()).ldelim();
             return writer;
         };
 
@@ -1578,14 +1585,12 @@ $root.SyncAction = (function() {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        SyncActionValue.decode = function decode(reader, length, error) {
+        SyncActionValue.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue();
             while (reader.pos < end) {
                 var tag = reader.uint32();
-                if (tag === error)
-                    break;
                 switch (tag >>> 3) {
                 case 1: {
                         message.timestamp = reader.int64();
@@ -1809,6 +1814,10 @@ $root.SyncAction = (function() {
                     }
                 case 62: {
                         message.ctwaPerCustomerDataSharingAction = $root.SyncAction.SyncActionValue.CtwaPerCustomerDataSharingAction.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 63: {
+                        message.paymentTosAction = $root.SyncAction.SyncActionValue.PaymentTosAction.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -2124,6 +2133,11 @@ $root.SyncAction = (function() {
                 if (error)
                     return "ctwaPerCustomerDataSharingAction." + error;
             }
+            if (message.paymentTosAction != null && message.hasOwnProperty("paymentTosAction")) {
+                var error = $root.SyncAction.SyncActionValue.PaymentTosAction.verify(message.paymentTosAction);
+                if (error)
+                    return "paymentTosAction." + error;
+            }
             return null;
         };
 
@@ -2423,6 +2437,11 @@ $root.SyncAction = (function() {
                     throw TypeError(".SyncAction.SyncActionValue.ctwaPerCustomerDataSharingAction: object expected");
                 message.ctwaPerCustomerDataSharingAction = $root.SyncAction.SyncActionValue.CtwaPerCustomerDataSharingAction.fromObject(object.ctwaPerCustomerDataSharingAction);
             }
+            if (object.paymentTosAction != null) {
+                if (typeof object.paymentTosAction !== "object")
+                    throw TypeError(".SyncAction.SyncActionValue.paymentTosAction: object expected");
+                message.paymentTosAction = $root.SyncAction.SyncActionValue.PaymentTosAction.fromObject(object.paymentTosAction);
+            }
             return message;
         };
 
@@ -2500,6 +2519,7 @@ $root.SyncAction = (function() {
                 object.notificationActivitySettingAction = null;
                 object.lidContactAction = null;
                 object.ctwaPerCustomerDataSharingAction = null;
+                object.paymentTosAction = null;
             }
             if (message.timestamp != null && message.hasOwnProperty("timestamp"))
                 if (typeof message.timestamp === "number")
@@ -2616,6 +2636,8 @@ $root.SyncAction = (function() {
                 object.lidContactAction = $root.SyncAction.SyncActionValue.LidContactAction.toObject(message.lidContactAction, options);
             if (message.ctwaPerCustomerDataSharingAction != null && message.hasOwnProperty("ctwaPerCustomerDataSharingAction"))
                 object.ctwaPerCustomerDataSharingAction = $root.SyncAction.SyncActionValue.CtwaPerCustomerDataSharingAction.toObject(message.ctwaPerCustomerDataSharingAction, options);
+            if (message.paymentTosAction != null && message.hasOwnProperty("paymentTosAction"))
+                object.paymentTosAction = $root.SyncAction.SyncActionValue.PaymentTosAction.toObject(message.paymentTosAction, options);
             return object;
         };
 
@@ -2752,14 +2774,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            AgentAction.decode = function decode(reader, length, error) {
+            AgentAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.AgentAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.name = reader.string();
@@ -2982,14 +3002,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            AndroidUnsupportedActions.decode = function decode(reader, length, error) {
+            AndroidUnsupportedActions.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.AndroidUnsupportedActions();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.allowed = reader.bool();
@@ -3198,14 +3216,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            ArchiveChatAction.decode = function decode(reader, length, error) {
+            ArchiveChatAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.ArchiveChatAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.archived = reader.bool();
@@ -3421,14 +3437,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            BotWelcomeRequestAction.decode = function decode(reader, length, error) {
+            BotWelcomeRequestAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.BotWelcomeRequestAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.isSent = reader.bool();
@@ -3626,14 +3640,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            CallLogAction.decode = function decode(reader, length, error) {
+            CallLogAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.CallLogAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.callLogRecord = $root.SyncAction.CallLogRecord.decode(reader, reader.uint32());
@@ -3836,14 +3848,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            ChatAssignmentAction.decode = function decode(reader, length, error) {
+            ChatAssignmentAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.ChatAssignmentAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.deviceAgentID = reader.string();
@@ -4041,14 +4051,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            ChatAssignmentOpenedStatusAction.decode = function decode(reader, length, error) {
+            ChatAssignmentOpenedStatusAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.ChatAssignmentOpenedStatusAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.chatOpened = reader.bool();
@@ -4246,14 +4254,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            ClearChatAction.decode = function decode(reader, length, error) {
+            ClearChatAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.ClearChatAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.messageRange = $root.SyncAction.SyncActionValue.SyncActionMessageRange.decode(reader, reader.uint32());
@@ -4511,14 +4517,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            ContactAction.decode = function decode(reader, length, error) {
+            ContactAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.ContactAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.fullName = reader.string();
@@ -4777,14 +4781,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            CtwaPerCustomerDataSharingAction.decode = function decode(reader, length, error) {
+            CtwaPerCustomerDataSharingAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.CtwaPerCustomerDataSharingAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.isCtwaPerCustomerDataSharingEnabled = reader.bool();
@@ -5014,14 +5016,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            CustomPaymentMethod.decode = function decode(reader, length, error) {
+            CustomPaymentMethod.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.CustomPaymentMethod();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.credentialId = reader.string();
@@ -5288,14 +5288,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            CustomPaymentMethodMetadata.decode = function decode(reader, length, error) {
+            CustomPaymentMethodMetadata.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.CustomPaymentMethodMetadata();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.key = reader.string();
@@ -5510,14 +5508,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            CustomPaymentMethodsAction.decode = function decode(reader, length, error) {
+            CustomPaymentMethodsAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.CustomPaymentMethodsAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             if (!(message.customPaymentMethods && message.customPaymentMethods.length))
@@ -5734,14 +5730,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            DeleteChatAction.decode = function decode(reader, length, error) {
+            DeleteChatAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.DeleteChatAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.messageRange = $root.SyncAction.SyncActionValue.SyncActionMessageRange.decode(reader, reader.uint32());
@@ -5955,14 +5949,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            DeleteIndividualCallLogAction.decode = function decode(reader, length, error) {
+            DeleteIndividualCallLogAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.DeleteIndividualCallLogAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.peerJid = reader.string();
@@ -6184,14 +6176,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            DeleteMessageForMeAction.decode = function decode(reader, length, error) {
+            DeleteMessageForMeAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.DeleteMessageForMeAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.deleteMedia = reader.bool();
@@ -6416,14 +6406,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            ExternalWebBetaAction.decode = function decode(reader, length, error) {
+            ExternalWebBetaAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.ExternalWebBetaAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.isOptIn = reader.bool();
@@ -6623,14 +6611,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            FavoritesAction.decode = function decode(reader, length, error) {
+            FavoritesAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.FavoritesAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             if (!(message.favorites && message.favorites.length))
@@ -6844,14 +6830,12 @@ $root.SyncAction = (function() {
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Favorite.decode = function decode(reader, length, error) {
+                Favorite.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.FavoritesAction.Favorite();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.id = reader.string();
@@ -7052,14 +7036,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            KeyExpiration.decode = function decode(reader, length, error) {
+            KeyExpiration.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.KeyExpiration();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.expiredKeyEpoch = reader.int32();
@@ -7257,14 +7239,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            LabelAssociationAction.decode = function decode(reader, length, error) {
+            LabelAssociationAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.LabelAssociationAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.labeled = reader.bool();
@@ -7539,14 +7519,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            LabelEditAction.decode = function decode(reader, length, error) {
+            LabelEditAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.LabelEditAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.name = reader.string();
@@ -7906,14 +7884,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            LabelReorderingAction.decode = function decode(reader, length, error) {
+            LabelReorderingAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.LabelReorderingAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             if (!(message.sortedLabelIds && message.sortedLabelIds.length))
@@ -8163,14 +8139,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            LidContactAction.decode = function decode(reader, length, error) {
+            LidContactAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.LidContactAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.fullName = reader.string();
@@ -8405,14 +8379,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            LocaleSetting.decode = function decode(reader, length, error) {
+            LocaleSetting.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.LocaleSetting();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.locale = reader.string();
@@ -8610,14 +8582,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            LockChatAction.decode = function decode(reader, length, error) {
+            LockChatAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.LockChatAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.locked = reader.bool();
@@ -8826,14 +8796,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            MarkChatAsReadAction.decode = function decode(reader, length, error) {
+            MarkChatAsReadAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.MarkChatAsReadAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.read = reader.bool();
@@ -9115,14 +9083,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            MarketingMessageAction.decode = function decode(reader, length, error) {
+            MarketingMessageAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.MarketingMessageAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.name = reader.string();
@@ -9447,14 +9413,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            MarketingMessageBroadcastAction.decode = function decode(reader, length, error) {
+            MarketingMessageBroadcastAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.MarketingMessageBroadcastAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.repliedCount = reader.int32();
@@ -9683,14 +9647,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            MerchantPaymentPartnerAction.decode = function decode(reader, length, error) {
+            MerchantPaymentPartnerAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.MerchantPaymentPartnerAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.status = reader.int32();
@@ -9982,14 +9944,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            MuteAction.decode = function decode(reader, length, error) {
+            MuteAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.MuteAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.muted = reader.bool();
@@ -10270,14 +10230,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            NoteEditAction.decode = function decode(reader, length, error) {
+            NoteEditAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.NoteEditAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.type = reader.int32();
@@ -10571,14 +10529,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            NotificationActivitySettingAction.decode = function decode(reader, length, error) {
+            NotificationActivitySettingAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.NotificationActivitySettingAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.notificationActivitySetting = reader.int32();
@@ -10823,14 +10779,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            NuxAction.decode = function decode(reader, length, error) {
+            NuxAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.NuxAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.acknowledged = reader.bool();
@@ -11028,14 +10982,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            PaymentInfoAction.decode = function decode(reader, length, error) {
+            PaymentInfoAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.PaymentInfoAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.cpi = reader.string();
@@ -11148,6 +11100,259 @@ $root.SyncAction = (function() {
             return PaymentInfoAction;
         })();
 
+        SyncActionValue.PaymentTosAction = (function() {
+
+            /**
+             * Properties of a PaymentTosAction.
+             * @memberof SyncAction.SyncActionValue
+             * @interface IPaymentTosAction
+             * @property {SyncAction.SyncActionValue.PaymentTosAction.PaymentNotice} paymentNotice PaymentTosAction paymentNotice
+             * @property {boolean} accepted PaymentTosAction accepted
+             */
+
+            /**
+             * Constructs a new PaymentTosAction.
+             * @memberof SyncAction.SyncActionValue
+             * @classdesc Represents a PaymentTosAction.
+             * @implements IPaymentTosAction
+             * @constructor
+             * @param {SyncAction.SyncActionValue.IPaymentTosAction=} [properties] Properties to set
+             */
+            function PaymentTosAction(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * PaymentTosAction paymentNotice.
+             * @member {SyncAction.SyncActionValue.PaymentTosAction.PaymentNotice} paymentNotice
+             * @memberof SyncAction.SyncActionValue.PaymentTosAction
+             * @instance
+             */
+            PaymentTosAction.prototype.paymentNotice = 0;
+
+            /**
+             * PaymentTosAction accepted.
+             * @member {boolean} accepted
+             * @memberof SyncAction.SyncActionValue.PaymentTosAction
+             * @instance
+             */
+            PaymentTosAction.prototype.accepted = false;
+
+            /**
+             * Creates a new PaymentTosAction instance using the specified properties.
+             * @function create
+             * @memberof SyncAction.SyncActionValue.PaymentTosAction
+             * @static
+             * @param {SyncAction.SyncActionValue.IPaymentTosAction=} [properties] Properties to set
+             * @returns {SyncAction.SyncActionValue.PaymentTosAction} PaymentTosAction instance
+             */
+            PaymentTosAction.create = function create(properties) {
+                return new PaymentTosAction(properties);
+            };
+
+            /**
+             * Encodes the specified PaymentTosAction message. Does not implicitly {@link SyncAction.SyncActionValue.PaymentTosAction.verify|verify} messages.
+             * @function encode
+             * @memberof SyncAction.SyncActionValue.PaymentTosAction
+             * @static
+             * @param {SyncAction.SyncActionValue.IPaymentTosAction} message PaymentTosAction message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            PaymentTosAction.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.paymentNotice);
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.accepted);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified PaymentTosAction message, length delimited. Does not implicitly {@link SyncAction.SyncActionValue.PaymentTosAction.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof SyncAction.SyncActionValue.PaymentTosAction
+             * @static
+             * @param {SyncAction.SyncActionValue.IPaymentTosAction} message PaymentTosAction message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            PaymentTosAction.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a PaymentTosAction message from the specified reader or buffer.
+             * @function decode
+             * @memberof SyncAction.SyncActionValue.PaymentTosAction
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {SyncAction.SyncActionValue.PaymentTosAction} PaymentTosAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            PaymentTosAction.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.PaymentTosAction();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.paymentNotice = reader.int32();
+                            break;
+                        }
+                    case 2: {
+                            message.accepted = reader.bool();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                if (!message.hasOwnProperty("paymentNotice"))
+                    throw $util.ProtocolError("missing required 'paymentNotice'", { instance: message });
+                if (!message.hasOwnProperty("accepted"))
+                    throw $util.ProtocolError("missing required 'accepted'", { instance: message });
+                return message;
+            };
+
+            /**
+             * Decodes a PaymentTosAction message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof SyncAction.SyncActionValue.PaymentTosAction
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {SyncAction.SyncActionValue.PaymentTosAction} PaymentTosAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            PaymentTosAction.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a PaymentTosAction message.
+             * @function verify
+             * @memberof SyncAction.SyncActionValue.PaymentTosAction
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            PaymentTosAction.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                switch (message.paymentNotice) {
+                default:
+                    return "paymentNotice: enum value expected";
+                case 0:
+                    break;
+                }
+                if (typeof message.accepted !== "boolean")
+                    return "accepted: boolean expected";
+                return null;
+            };
+
+            /**
+             * Creates a PaymentTosAction message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof SyncAction.SyncActionValue.PaymentTosAction
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {SyncAction.SyncActionValue.PaymentTosAction} PaymentTosAction
+             */
+            PaymentTosAction.fromObject = function fromObject(object) {
+                if (object instanceof $root.SyncAction.SyncActionValue.PaymentTosAction)
+                    return object;
+                var message = new $root.SyncAction.SyncActionValue.PaymentTosAction();
+                switch (object.paymentNotice) {
+                default:
+                    if (typeof object.paymentNotice === "number") {
+                        message.paymentNotice = object.paymentNotice;
+                        break;
+                    }
+                    break;
+                case "BR_PAY_PRIVACY_POLICY":
+                case 0:
+                    message.paymentNotice = 0;
+                    break;
+                }
+                if (object.accepted != null)
+                    message.accepted = Boolean(object.accepted);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a PaymentTosAction message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof SyncAction.SyncActionValue.PaymentTosAction
+             * @static
+             * @param {SyncAction.SyncActionValue.PaymentTosAction} message PaymentTosAction
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            PaymentTosAction.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.paymentNotice = options.enums === String ? "BR_PAY_PRIVACY_POLICY" : 0;
+                    object.accepted = false;
+                }
+                if (message.paymentNotice != null && message.hasOwnProperty("paymentNotice"))
+                    object.paymentNotice = options.enums === String ? $root.SyncAction.SyncActionValue.PaymentTosAction.PaymentNotice[message.paymentNotice] === undefined ? message.paymentNotice : $root.SyncAction.SyncActionValue.PaymentTosAction.PaymentNotice[message.paymentNotice] : message.paymentNotice;
+                if (message.accepted != null && message.hasOwnProperty("accepted"))
+                    object.accepted = message.accepted;
+                return object;
+            };
+
+            /**
+             * Converts this PaymentTosAction to JSON.
+             * @function toJSON
+             * @memberof SyncAction.SyncActionValue.PaymentTosAction
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            PaymentTosAction.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for PaymentTosAction
+             * @function getTypeUrl
+             * @memberof SyncAction.SyncActionValue.PaymentTosAction
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            PaymentTosAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/SyncAction.SyncActionValue.PaymentTosAction";
+            };
+
+            /**
+             * PaymentNotice enum.
+             * @name SyncAction.SyncActionValue.PaymentTosAction.PaymentNotice
+             * @enum {number}
+             * @property {number} BR_PAY_PRIVACY_POLICY=0 BR_PAY_PRIVACY_POLICY value
+             */
+            PaymentTosAction.PaymentNotice = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "BR_PAY_PRIVACY_POLICY"] = 0;
+                return values;
+            })();
+
+            return PaymentTosAction;
+        })();
+
         SyncActionValue.PinAction = (function() {
 
             /**
@@ -11233,14 +11438,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            PinAction.decode = function decode(reader, length, error) {
+            PinAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.PinAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.pinned = reader.bool();
@@ -11438,14 +11641,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            PnForLidChatAction.decode = function decode(reader, length, error) {
+            PnForLidChatAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.PnForLidChatAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.pnJid = reader.string();
@@ -11645,14 +11846,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            PrimaryFeature.decode = function decode(reader, length, error) {
+            PrimaryFeature.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.PrimaryFeature();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             if (!(message.flags && message.flags.length))
@@ -11864,14 +12063,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            PrimaryVersionAction.decode = function decode(reader, length, error) {
+            PrimaryVersionAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.PrimaryVersionAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.version = reader.string();
@@ -12069,14 +12266,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            PrivacySettingDisableLinkPreviewsAction.decode = function decode(reader, length, error) {
+            PrivacySettingDisableLinkPreviewsAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.PrivacySettingDisableLinkPreviewsAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.isPreviewsDisabled = reader.bool();
@@ -12274,14 +12469,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            PrivacySettingRelayAllCalls.decode = function decode(reader, length, error) {
+            PrivacySettingRelayAllCalls.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.PrivacySettingRelayAllCalls();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.isEnabled = reader.bool();
@@ -12479,14 +12672,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            PushNameSetting.decode = function decode(reader, length, error) {
+            PushNameSetting.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.PushNameSetting();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.name = reader.string();
@@ -12730,14 +12921,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            QuickReplyAction.decode = function decode(reader, length, error) {
+            QuickReplyAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.QuickReplyAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.shortcut = reader.string();
@@ -13001,14 +13190,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            RecentEmojiWeightsAction.decode = function decode(reader, length, error) {
+            RecentEmojiWeightsAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.RecentEmojiWeightsAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             if (!(message.weights && message.weights.length))
@@ -13225,14 +13412,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            RemoveRecentStickerAction.decode = function decode(reader, length, error) {
+            RemoveRecentStickerAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.RemoveRecentStickerAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.lastStickerSentTs = reader.int64();
@@ -13444,14 +13629,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            SecurityNotificationSetting.decode = function decode(reader, length, error) {
+            SecurityNotificationSetting.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.SecurityNotificationSetting();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.showNotification = reader.bool();
@@ -13649,14 +13832,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            StarAction.decode = function decode(reader, length, error) {
+            StarAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.StarAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.starred = reader.bool();
@@ -13867,14 +14048,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            StatusPrivacyAction.decode = function decode(reader, length, error) {
+            StatusPrivacyAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.StatusPrivacyAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.mode = reader.int32();
@@ -14249,14 +14428,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            StickerAction.decode = function decode(reader, length, error) {
+            StickerAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.StickerAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.url = reader.string();
@@ -14629,14 +14806,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            SubscriptionAction.decode = function decode(reader, length, error) {
+            SubscriptionAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.SubscriptionAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.isDeactivated = reader.bool();
@@ -14884,14 +15059,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            SyncActionMessage.decode = function decode(reader, length, error) {
+            SyncActionMessage.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.SyncActionMessage();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.key = $root.Protocol.MessageKey.decode(reader, reader.uint32());
@@ -15145,14 +15318,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            SyncActionMessageRange.decode = function decode(reader, length, error) {
+            SyncActionMessageRange.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.SyncActionMessageRange();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.lastMessageTimestamp = reader.int64();
@@ -15423,14 +15594,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            TimeFormatAction.decode = function decode(reader, length, error) {
+            TimeFormatAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.TimeFormatAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.isTwentyFourHourFormatEnabled = reader.bool();
@@ -15628,14 +15797,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            UnarchiveChatsSetting.decode = function decode(reader, length, error) {
+            UnarchiveChatsSetting.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.UnarchiveChatsSetting();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.unarchiveChats = reader.bool();
@@ -15833,14 +16000,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            UserStatusMuteAction.decode = function decode(reader, length, error) {
+            UserStatusMuteAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.UserStatusMuteAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.muted = reader.bool();
@@ -16038,14 +16203,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            UsernameChatStartModeAction.decode = function decode(reader, length, error) {
+            UsernameChatStartModeAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.UsernameChatStartModeAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.chatStartMode = reader.int32();
@@ -16276,14 +16439,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            WaffleAccountLinkStateAction.decode = function decode(reader, length, error) {
+            WaffleAccountLinkStateAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.WaffleAccountLinkStateAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 2: {
                             message.linkState = reader.int32();
@@ -16507,14 +16668,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            WamoUserIdentifierAction.decode = function decode(reader, length, error) {
+            WamoUserIdentifierAction.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.WamoUserIdentifierAction();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.identifier = reader.string();
@@ -16871,14 +17030,12 @@ $root.SyncAction = (function() {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CallLogRecord.decode = function decode(reader, length, error) {
+        CallLogRecord.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.CallLogRecord();
             while (reader.pos < end) {
                 var tag = reader.uint32();
-                if (tag === error)
-                    break;
                 switch (tag >>> 3) {
                 case 1: {
                         message.callResult = reader.int32();
@@ -17466,14 +17623,12 @@ $root.SyncAction = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            ParticipantInfo.decode = function decode(reader, length, error) {
+            ParticipantInfo.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.CallLogRecord.ParticipantInfo();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.userJid = reader.string();
@@ -17780,14 +17935,12 @@ $root.SyncAction = (function() {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        RecentEmojiWeight.decode = function decode(reader, length, error) {
+        RecentEmojiWeight.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.RecentEmojiWeight();
             while (reader.pos < end) {
                 var tag = reader.uint32();
-                if (tag === error)
-                    break;
                 switch (tag >>> 3) {
                 case 1: {
                         message.emoji = reader.string();
@@ -18021,14 +18174,12 @@ $root.ChatLockSettings = (function() {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        ChatLockSettings.decode = function decode(reader, length, error) {
+        ChatLockSettings.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ChatLockSettings.ChatLockSettings();
             while (reader.pos < end) {
                 var tag = reader.uint32();
-                if (tag === error)
-                    break;
                 switch (tag >>> 3) {
                 case 1: {
                         message.hideLockedChats = reader.bool();
@@ -18291,14 +18442,12 @@ $root.UserPassword = (function() {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        UserPassword.decode = function decode(reader, length, error) {
+        UserPassword.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.UserPassword.UserPassword();
             while (reader.pos < end) {
                 var tag = reader.uint32();
-                if (tag === error)
-                    break;
                 switch (tag >>> 3) {
                 case 1: {
                         message.encoding = reader.int32();
@@ -18643,14 +18792,12 @@ $root.UserPassword = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            TransformerArg.decode = function decode(reader, length, error) {
+            TransformerArg.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.UserPassword.UserPassword.TransformerArg();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.key = reader.string();
@@ -18888,14 +19035,12 @@ $root.UserPassword = (function() {
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Value.decode = function decode(reader, length, error) {
+                Value.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.UserPassword.UserPassword.TransformerArg.Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.asBlob = reader.bytes();
@@ -19147,14 +19292,12 @@ $root.DeviceCapabilities = (function() {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        DeviceCapabilities.decode = function decode(reader, length, error) {
+        DeviceCapabilities.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.DeviceCapabilities.DeviceCapabilities();
             while (reader.pos < end) {
                 var tag = reader.uint32();
-                if (tag === error)
-                    break;
                 switch (tag >>> 3) {
                 case 1: {
                         message.chatLockSupportLevel = reader.int32();
@@ -19407,14 +19550,12 @@ $root.DeviceCapabilities = (function() {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            LIDMigration.decode = function decode(reader, length, error) {
+            LIDMigration.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.DeviceCapabilities.DeviceCapabilities.LIDMigration();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
-                    if (tag === error)
-                        break;
                     switch (tag >>> 3) {
                     case 1: {
                             message.chatDbMigrationTimestamp = reader.uint64();
@@ -19563,7 +19704,7 @@ $root.Protocol = (function() {
          * @memberof Protocol
          * @interface ILimitSharing
          * @property {boolean|null} [sharingLimited] LimitSharing sharingLimited
-         * @property {Protocol.LimitSharing.Trigger|null} [trigger] LimitSharing trigger
+         * @property {Protocol.LimitSharing.TriggerType|null} [trigger] LimitSharing trigger
          * @property {number|Long|null} [limitSharingSettingTimestamp] LimitSharing limitSharingSettingTimestamp
          * @property {boolean|null} [initiatedByMe] LimitSharing initiatedByMe
          */
@@ -19593,7 +19734,7 @@ $root.Protocol = (function() {
 
         /**
          * LimitSharing trigger.
-         * @member {Protocol.LimitSharing.Trigger} trigger
+         * @member {Protocol.LimitSharing.TriggerType} trigger
          * @memberof Protocol.LimitSharing
          * @instance
          */
@@ -19674,14 +19815,12 @@ $root.Protocol = (function() {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        LimitSharing.decode = function decode(reader, length, error) {
+        LimitSharing.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Protocol.LimitSharing();
             while (reader.pos < end) {
                 var tag = reader.uint32();
-                if (tag === error)
-                    break;
                 switch (tag >>> 3) {
                 case 1: {
                         message.sharingLimited = reader.bool();
@@ -19834,7 +19973,7 @@ $root.Protocol = (function() {
             if (message.sharingLimited != null && message.hasOwnProperty("sharingLimited"))
                 object.sharingLimited = message.sharingLimited;
             if (message.trigger != null && message.hasOwnProperty("trigger"))
-                object.trigger = options.enums === String ? $root.Protocol.LimitSharing.Trigger[message.trigger] === undefined ? message.trigger : $root.Protocol.LimitSharing.Trigger[message.trigger] : message.trigger;
+                object.trigger = options.enums === String ? $root.Protocol.LimitSharing.TriggerType[message.trigger] === undefined ? message.trigger : $root.Protocol.LimitSharing.TriggerType[message.trigger] : message.trigger;
             if (message.limitSharingSettingTimestamp != null && message.hasOwnProperty("limitSharingSettingTimestamp"))
                 if (typeof message.limitSharingSettingTimestamp === "number")
                     object.limitSharingSettingTimestamp = options.longs === String ? String(message.limitSharingSettingTimestamp) : message.limitSharingSettingTimestamp;
@@ -19872,15 +20011,15 @@ $root.Protocol = (function() {
         };
 
         /**
-         * Trigger enum.
-         * @name Protocol.LimitSharing.Trigger
+         * TriggerType enum.
+         * @name Protocol.LimitSharing.TriggerType
          * @enum {number}
          * @property {number} UNKNOWN=0 UNKNOWN value
          * @property {number} CHAT_SETTING=1 CHAT_SETTING value
          * @property {number} BIZ_SUPPORTS_FB_HOSTING=2 BIZ_SUPPORTS_FB_HOSTING value
          * @property {number} UNKNOWN_GROUP=3 UNKNOWN_GROUP value
          */
-        LimitSharing.Trigger = (function() {
+        LimitSharing.TriggerType = (function() {
             var valuesById = {}, values = Object.create(valuesById);
             values[valuesById[0] = "UNKNOWN"] = 0;
             values[valuesById[1] = "CHAT_SETTING"] = 1;
@@ -20010,14 +20149,12 @@ $root.Protocol = (function() {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        MessageKey.decode = function decode(reader, length, error) {
+        MessageKey.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Protocol.MessageKey();
             while (reader.pos < end) {
                 var tag = reader.uint32();
-                if (tag === error)
-                    break;
                 switch (tag >>> 3) {
                 case 1: {
                         message.remoteJid = reader.string();

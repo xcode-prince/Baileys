@@ -311,6 +311,7 @@ message BotMetadata {
     optional BotPromotionMessageMetadata botPromotionMessageMetadata = 21;
     optional BotModeSelectionMetadata botModeSelectionMetadata = 22;
     optional BotQuotaMetadata botQuotaMetadata = 23;
+    optional BotAgeCollectionMetadata botAgeCollectionMetadata = 24;
 }
 
 message BotSourcesMetadata {
@@ -329,6 +330,11 @@ message BotSourcesMetadata {
             SUPPORT = 3;
         }
     }
+}
+
+message BotAgeCollectionMetadata {
+    optional bool ageCollectionEligible = 1;
+    optional bool shouldTriggerAgeCollectionOnClient = 2;
 }
 
 message BotImagineMetadata {
@@ -889,6 +895,8 @@ message ContextInfo {
         HD_VIDEO_CHILD = 2;
         SD_IMAGE_PARENT = 3;
         HD_IMAGE_CHILD = 4;
+        MOTION_PHOTO_PARENT = 5;
+        MOTION_PHOTO_CHILD = 6;
     }
     enum StatusAttributionType {
         NONE = 0;
@@ -901,7 +909,7 @@ message ContextInfo {
         GIF = 2;
         AUDIO = 3;
         TEXT = 4;
-        MUSIC_FIRST = 5;
+        MUSIC_STANDALONE = 5;
     }
     message UTMInfo {
         optional string utmSource = 1;
@@ -1078,6 +1086,8 @@ message Message {
             BOT_FEEDBACK_NEGATIVE_PERSONALIZED = 10;
             BOT_FEEDBACK_NEGATIVE_CLARITY = 11;
             BOT_FEEDBACK_NEGATIVE_DOESNT_LOOK_LIKE_THE_PERSON = 12;
+            BOT_FEEDBACK_NEGATIVE_HALLUCINATION_INTERNAL_ONLY = 13;
+            BOT_FEEDBACK_NEGATIVE = 14;
         }
         enum BotFeedbackKindMultipleNegative {
             BOT_FEEDBACK_MULTIPLE_NEGATIVE_GENERIC = 1;
@@ -2273,4 +2283,5 @@ enum BotMetricsEntryPoint {
     META_AI_CHAT_SHORTCUT_AI_STUDIO = 22;
     UGC_CHAT_SHORTCUT_AI_STUDIO = 23;
     NEW_CHAT_AI_STUDIO = 24;
+    AIVOICE_FAVICON_CALL_HISTORY = 25;
 }
