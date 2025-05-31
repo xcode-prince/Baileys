@@ -113,6 +113,8 @@ import makeWASocket from '@itsukichan/baileys'
         - [Buttons Cards Message](#buttons-cards-message) 
         - [Buttons Template Message](#buttons-template-message) 
         - [Buttons Interactive Message](#buttons-interactive-message) 
+        - [Buttons Interactive Message PIX](#buttons-interactive-message-pix) 
+        - [Buttons Interactive Message PAY](#buttons-interactive-message-PAY) 
         - [Status Mentions Message](#status-mentions-message) 
         - [Send Album Message](#send-album-message) 
         - [Shop Message](#shop-message) 
@@ -396,25 +398,25 @@ const suki = makeWASocket({
 suki.ev.on('creds.update', saveState)
 
 // Mongo Auth
-import { MongoClient } from "mongodb";
+import { MongoClient } from "mongodb"
 
 const connectAuth = async() => {
-    global.client = new MongoClient('mongoURL');
+    global.client = new MongoClient('mongoURL')
     global.client.connect(err => {
         if (err) {
-            console.warn("Warning: MongoDB link is invalid or cannot be connected.");
+            console.warn("Warning: MongoDB link is invalid or cannot be connected.")
         } else {
             console.log('Successfully Connected To MongoDB Server')
         }
-    });
+    })
 }
-  await client.connect();
+  await client.connect()
   const collection = client.db("@itsukichann").collection("sessions")
-  return collection;
-};
+  return collection
+}
 
-const Authentication = await connectAuth();
-const { state, saveCreds } = await useMongoFileAuthState(Authentication);
+const Authentication = await connectAuth()
+const { state, saveCreds } = await useMongoFileAuthState(Authentication)
 const suki = makeWASocket({
         auth: state,
         printQRInTerminal: true
@@ -430,12 +432,12 @@ suki.ev.on('creds.update', saveCreds)
 
 - By default poll votes are encrypted and handled in `messages.update`
 ```ts
-import pino from "pino";
-import { makeInMemoryStore, getAggregateVotesInPollMessage } from '@itsukichan/baileys';
+import pino from "pino"
+import { makeInMemoryStore, getAggregateVotesInPollMessage } from '@itsukichan/baileys'
 
-const logger = pino({ timestamp: () => `,"time":"${new Date().toJSON()}"` }).child({ class: "@Itsukichann" });
-logger.level = "fatal";
-const store = makeInMemoryStore({ logger });
+const logger = pino({ timestamp: () => `,"time":"${new Date().toJSON()}"` }).child({ class: "@Itsukichann" })
+logger.level = "fatal"
+const store = makeInMemoryStore({ logger })
 
 async function getMessage(key){
     if (store) {
@@ -602,8 +604,8 @@ await suki.sendMessage(
 const vcard = 'BEGIN:VCARD\n' // metadata of the contact card
             + 'VERSION:3.0\n' 
             + 'FN:Jeff Singh\n' // full name
-            + 'ORG:Ashoka Uni;\n' // the organization of the contact
-            + 'TEL;type=CELL;type=VOICE;waid=911234567890:+91 12345 67890\n' // WhatsApp ID + phone number
+            + 'ORG:Ashoka Uni\n' // the organization of the contact
+            + 'TELtype=CELLtype=VOICEwaid=911234567890:+91 12345 67890\n' // WhatsApp ID + phone number
             + 'END:VCARD'
 
 await suki.sendMessage(
@@ -1272,7 +1274,7 @@ await suki.sendMessage(
             }
         ]
     }
-);
+)
 
 // If you want to use an image
 await suki.sendMessage(
@@ -1296,7 +1298,7 @@ await suki.sendMessage(
        ], 
        hasMediaAttachment: false // or true
     }
-);
+)
 
 // If you want to use an video
 await suki.sendMessage(
@@ -1320,7 +1322,7 @@ await suki.sendMessage(
        ], 
        hasMediaAttachment: false // or true
     }
-);
+)
 
 // If you want to use an document
 await suki.sendMessage(
@@ -1346,7 +1348,7 @@ await suki.sendMessage(
        ], 
        hasMediaAttachment: false // or true
     }
-);
+)
 
 // If you want to use an location
 await suki.sendMessage(
@@ -1372,7 +1374,7 @@ await suki.sendMessage(
        ], 
        hasMediaAttachment: false // or true
     }
-);
+)
 
 // if you want to use an product
 await suki.sendMessage(
@@ -1407,8 +1409,83 @@ await suki.sendMessage(
         ], 
         hasMediaAttachment: false // or true
     }
-);
+)
 ```
+
+### Buttons Interactive Message PIX
+```ts
+await suki.sendMessage( 
+    jid, 
+    { 
+       text: '', // This string is required. Even it's empty. 
+       interactiveButtons: [ 
+          { 
+             name: 'payment_info', 
+             buttonParamsJson: JSON.stringify({ 
+                payment_settings: [{ 
+                   type: "pix_static_code", 
+                   pix_static_code:  { 
+                      merchant_name: 'itsukichann kawaii >\\\\\\<', 
+                      key: 'example@itsukichan.com', 
+                      key_type: 'EMAIL' // PHONE || EMAIL || CPF || EVP 
+                   } 
+               }] 
+            }) 
+         } 
+      ], 
+   } 
+)
+ ```
+
+### Buttons Interactive Message PAY
+```ts
+await suki.sendMessage( 
+    jid, 
+    { 
+       text: '', // This string is required. Even it's empty. 
+       interactiveButtons: [ 
+          { 
+             name: 'review_and_pay', 
+             buttonParamsJson: JSON.stringify({ 
+                currency: 'IDR', 
+                payment_configuration: '', 
+                payment_type: '', 
+                total_amount: {
+                    value: '999999999',
+                    offset: '100'
+                }, 
+                reference_id: '45XXXXX',
+                type: 'physical-goods',
+                payment_method: 'confirm', 
+                payment_status: 'captured', 
+                payment_timestamp: Math.floor(Date.now() / 1000),
+                order: {
+                    status: 'completed', 
+                    description: '', 
+                    subtotal: {
+                        value: '0', 
+                        offset: '100'
+                    }, 
+                    order_type: 'PAYMENT_REQUEST', 
+                    items: [{
+                        retailer_id: 'your_retailer_id', 
+                        name: 'Itsukichann Kawaii >\\\<', 
+                        amount: {
+                            value: '999999999', 
+                            offset: '100'
+                        }, 
+                        quantity: '1', 
+                    }]
+                }, 
+                additional_note: 'Itsukichann Kawaii >\\\<', 
+                native_payment_methods: [], 
+                share_payment_status: false
+            }) 
+         } 
+      ], 
+   } 
+)
+ ```
 
 ### Status Mentions Message
 ```ts
@@ -1466,7 +1543,7 @@ await suki.sendMessage(
        }, 
        viewOnce: true
     }
-);
+)
 
 // Image
 await suki.sendMessage(
@@ -1486,7 +1563,7 @@ await suki.sendMessage(
        hasMediaAttachment: false, // or true
        viewOnce: true
     }
-);
+)
 
 // Video
 await suki.sendMessage(
@@ -1506,7 +1583,7 @@ await suki.sendMessage(
        hasMediaAttachment: false, // or true
        viewOnce: true
     }
-);
+)
 
 // Document
 await suki.sendMessage(
@@ -1528,7 +1605,7 @@ await suki.sendMessage(
        hasMediaAttachment: false, // or true, 
        viewOnce: true
     }
-);
+)
 
 // Location
 await suki.sendMessage(
@@ -1550,7 +1627,7 @@ await suki.sendMessage(
        hasMediaAttachment: false, // or true
        viewOnce: true
     }
-);
+)
 
 // Product
 await suki.sendMessage(
@@ -1581,7 +1658,7 @@ await suki.sendMessage(
         hasMediaAttachment: false, // or true
         viewOnce: true
     }
-);
+)
 ```
 ### Collection Message
 ```ts
@@ -1599,7 +1676,7 @@ await suki.sendMessage(
        }, 
        viewOnce: true
     }
-);
+)
 
 // Image
 await suki.sendMessage(
@@ -1620,7 +1697,7 @@ await suki.sendMessage(
        hasMediaAttachment: false, // or true
        viewOnce: true
     }
-);
+)
 
 // Video
 await suki.sendMessage(
@@ -1641,7 +1718,7 @@ await suki.sendMessage(
        hasMediaAttachment: false, // or true
        viewOnce: true
     }
-);
+)
 
 // Document
 await suki.sendMessage(
@@ -1664,7 +1741,7 @@ await suki.sendMessage(
        hasMediaAttachment: false, // or true, 
        viewOnce: true
     }
-);
+)
 
 // Location
 await suki.sendMessage(
@@ -1687,7 +1764,7 @@ await suki.sendMessage(
        hasMediaAttachment: false, // or true
        viewOnce: true
     }
-);
+)
 
 // Product
 await suki.sendMessage(
@@ -1719,7 +1796,7 @@ await suki.sendMessage(
         hasMediaAttachment: false, // or true
         viewOnce: true
     }
-);
+)
 ```
 
 ### Sending Messages with Link Previews
@@ -1744,7 +1821,7 @@ Sending media (video, stickers, images) is easier & more efficient than ever.
 > [!NOTE]
 > In media messages, you can pass `{ stream: Stream }` or `{ url: Url }` or `Buffer` directly, you can see more [here](https://baileys.whiskeysockets.io/types/WAMediaUpload.html)
 
-- When specifying a media url, Baileys never loads the entire buffer into memory; it even encrypts the media as a readable stream.
+- When specifying a media url, Baileys never loads the entire buffer into memory it even encrypts the media as a readable stream.
 
 > [!TIP]
 > It's recommended to use Stream or Url to save memory
@@ -1860,7 +1937,7 @@ await suki.sendMessage(jid, { delete: msg.key })
 await suki.sendMessage(jid, {
       text: 'updated text goes here',
       edit: response.key,
-    });
+    })
 ```
 
 ## Manipulating Media Messages
@@ -2031,7 +2108,7 @@ await suki.chatModify({
                     fromMe: true // or `false`
                 }
             ],
-            star: true // - true: Star Message; false: Unstar Message
+            star: true // - true: Star Message false: Unstar Message
         }
     },
     jid
