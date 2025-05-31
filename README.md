@@ -1410,6 +1410,31 @@ await suki.sendMessage(
 );
 ```
 
+### Send "Copy Pix key" button
+```js
+await suki.sendMessage(
+   jid,
+   {
+      text: '' // This string is required. Even it's empty.
+      interactiveButtons: [
+         {
+            name: 'payment_info',
+            buttonParamsJson: JSON.stringify({
+               payment_settings: [{
+                  type: "pix_static_code",
+                  pix_static_code:  {
+                     merchant_name: 'itsukichann kawaii >\\\\\\<',
+                     key: 'example@itsukichan.com',
+                     key_type: 'EMAIL' // PHONE || EMAIL || CPF || EVP
+                  }
+               }]
+            })
+         }
+      ],
+   }
+)
+```
+
 ### Status Mentions Message
 ```ts
 await suki.sendStatusMentions(
