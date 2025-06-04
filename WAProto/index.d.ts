@@ -15,6 +15,7 @@ import { Reporting } from './Reporting'
 import { ServerSync } from './ServerSync'
 import { SignalLocalStorageProtocol } from './SignalLocalStorageProtocol'
 import { SignalWhisperTextProtocol } from './SignalWhisperTextProtocol'
+import { StatusAttributions } from './StatusAttributions'
 import { SyncAction } from './SyncAction'
 import { UserPassword } from './UserPassword'
 import { VnameCert } from './VnameCert'
@@ -39,6 +40,7 @@ const proto = {
   ...ServerSync,
   ...SignalLocalStorageProtocol, 
   ...SignalWhisperTextProtocol, 
+  ...StatusAttributions, 
   ...SyncAction,
   ...UserPassword,
   ...VnameCert,
