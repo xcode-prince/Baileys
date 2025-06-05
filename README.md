@@ -1,15 +1,35 @@
-
 # <div align='center'>Baileys - Typescript/Javascript WhatsApp Web API</div>
 
-<div align='center'>
+<div align="center">
 
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/whiskeysockets/baileys/total)
-![NPM Downloads](https://img.shields.io/npm/dw/%40whiskeysockets%2Fbaileys?label=npm&color=%23CB3837)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/whiskeysockets/baileys)
-![GitHub License](https://img.shields.io/github/license/whiskeysockets/baileys)
-![Discard](https://img.shields.io/discord/725839806084546610?label=discord&color=%235865F2)
-![GitHub Repo stars](https://img.shields.io/github/stars/whiskeysockets/baileys)
-![GitHub forks](https://img.shields.io/github/forks/whiskeysockets/baileys)
+<img src="https://wy0xihlhnevw1toh.public.blob.vercel-storage.com/images/ueug_ItsukichanBot-kSBgWKyatxf68Vxl3DMdr14VhAv7tR.png" alt="Header Image" width="100%"/>
+
+<br/>
+
+<!-- Badges -->
+<p>
+  <img src="https://img.shields.io/npm/dw/%40itsukichan%2Fbaileys?label=npm&color=%23CB3837" alt="NPM Downloads"/>
+  <img src="https://img.shields.io/github/v/release/itsukichann/baileys?include_prereleases&sort=semver" alt="Latest Release"/>
+  <img src="https://img.shields.io/github/languages/code-size/itsukichann/baileys" alt="Code Size"/>
+  <img src="https://img.shields.io/github/license/itsukichann/baileys" alt="License"/>
+  <img src="https://img.shields.io/github/stars/itsukichann/baileys" alt="Stars"/>
+  <img src="https://img.shields.io/github/forks/itsukichann/baileys" alt="Forks"/>
+</p>
+
+<!-- GitHub Stats -->
+<p>
+  <img src="https://github-readme-stats.vercel.app/api?username=itsukichann&show_icons=true&theme=radical" alt="GitHub Stats"/>
+</p>
+
+<!-- WhatsApp Links -->
+<p>
+  <a href="https://whatsapp.com/channel/0029Vag9VSI2ZjCocqa2lB1y">
+    <img src="https://img.shields.io/badge/WhatsApp-Channel-brightgreen" alt="WA Channel"/>
+  </a>
+  <a href="https://wa.me/6285710611264">
+    <img src="https://img.shields.io/badge/Owner-WA-green" alt="WA Owner"/>
+  </a>
+</p>
 
 </div>
 
