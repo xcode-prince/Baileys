@@ -295,6 +295,7 @@ message MessageAssociation {
         MOTION_PHOTO = 12;
         STATUS_LINK_ACTION = 13;
         VIEW_ALL_REPLIES = 14;
+        STATUS_ADD_YOURS_AI_IMAGINE = 15;
     }
 }
 
@@ -558,6 +559,7 @@ message AIRichResponseMessage {
     optional AIRichResponseMessageType messageType = 1;
     repeated AIRichResponseSubMessage submessages = 2;
     optional AIRichResponseUnifiedResponse unifiedResponse = 3;
+    optional ContextInfo contextInfo = 4;
     message AIRichResponseCodeMetadata {
         optional string codeLanguage = 1;
         repeated AIRichResponseCodeBlock codeBlocks = 2;
@@ -684,6 +686,7 @@ message AIRichResponseMessage {
     }
     message AIRichResponseTableMetadata {
         repeated AIRichResponseTableRow rows = 1;
+        optional string title = 2;
         message AIRichResponseTableRow {
             repeated string items = 1;
             optional bool isHeading = 2;
@@ -1616,6 +1619,16 @@ message Message {
         optional Message.PaymentLinkMetadata paymentLinkMetadata = 1;
         optional Message.URLMetadata urlMetadata = 2;
         optional uint32 fbExperimentId = 3;
+        optional uint32 linkMediaDuration = 4;
+        optional SocialMediaPostType socialMediaPostType = 5;
+        enum SocialMediaPostType {
+            NONE = 0;
+            REEL = 1;
+            LIVE_VIDEO = 2;
+            LONG_VIDEO = 3;
+            SINGLE_IMAGE = 4;
+            CAROUSEL = 5;
+        }
     }
     message ListMessage {
         optional string title = 1;
