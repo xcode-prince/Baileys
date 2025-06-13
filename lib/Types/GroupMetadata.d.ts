@@ -3,7 +3,7 @@ import { Contact } from './Contact'
 export type GroupParticipant = (Contact & {
     isAdmin?: boolean
     isSuperAdmin?: boolean
-    admin?: 'admin' | 'superadmin' | null
+    admin?: 'admin' | 'superadmin' | 'member'
 })
 
 export type ParticipantAction = 'add' | 'remove' | 'promote' | 'demote' | 'modify'
@@ -16,6 +16,7 @@ export interface GroupMetadata {
     id: string
     addressingMode: string
     owner: string | undefined
+    ownerCountry: string, 
     subject: string
     /** group subject owner */
     subjectOwner?: string
