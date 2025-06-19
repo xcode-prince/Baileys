@@ -1,5 +1,5 @@
 {
-  "name": "@itsukichan/baileys",
+  "name": "@xcode-prince/baileys",
   "version": "7.3.1",
   "description": "WhatsApp API Modification By Itsukiichan",
   "keywords": [
@@ -12,13 +12,13 @@
     "automation",
     "multi-device"
   ],
-  "homepage": "https://github.com/Itsukichann/Baileys",
+  "homepage": "https://github.com/xcode-prince/Baileys",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/Itsukichann/Baileys.git"
+    "url": "git+ssh://git@github.com/xcode-prince/Baileys.git"
   },
   "license": "MIT",
-  "author": "Itsukichann",
+  "author": "Pangeran",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
